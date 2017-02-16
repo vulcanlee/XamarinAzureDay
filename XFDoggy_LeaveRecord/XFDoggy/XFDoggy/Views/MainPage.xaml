@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.MainPage"
+             Title="關於多奇數位創意"
+             x:Name="ThisPage"
+             NavigationPage.BackButtonTitle="上一頁"
+             >
+
+    <Grid
+        RowSpacing="0" ColumnSpacing="0"
+        BackgroundColor="{StaticResource 頁面背景Color}"
+        >
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            Margin="10"
+            BackgroundColor="{StaticResource 頁面內容本文背景Color}"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout
+                Orientation="Vertical"
+                Grid.Row="0"
+                >
+                <!--頁面標題與文字-->
+                <Grid
+                    RowSpacing="0" ColumnSpacing="0"
+                    BackgroundColor="{StaticResource 頁面內容標題背景Color}"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Text="Xamarin相關資源"
+                        Style="{StaticResource 頁面內文標題文字Style}"
+                        />
+                </Grid>
+
+                <!--這是一個可用於 MVVM Data Binding 的 Picker 自訂控制項-->
+                <localControls:BindablePicker
+                    Margin="20,0"
+                    ItemsSource="{Binding Xamarin學習資源Picker清單}"
+                    SelectedItem="{Binding Xamarin學習資源選擇項目}"
+                    SelectedItemCommand="{Binding Xamarin學習資源選擇項目Command}"
+                    />
+            </StackLayout>
+
+            <!--WebView 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.WebView/-->
+            <WebView
+                Grid.Row="1"
+                Margin="10,10,10,0"
+                Source="{Binding 顯示網頁的URL}" />
+        </Grid>
+    </Grid>
+
+</ContentPage>

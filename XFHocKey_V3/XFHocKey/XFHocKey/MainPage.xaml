@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XFHocKey"
+             NavigationPage.HasBackButton="False"
+             Title="多奇集團"
+             x:Class="XFHocKey.MainPage">
+
+  <ContentPage.Padding>30</ContentPage.Padding>
+ 
+  <StackLayout
+    Orientation="Vertical"
+    VerticalOptions="Center"
+    >
+    <Label 
+      HorizontalOptions="Center"
+      Text="主頁面" FontSize="36" />
+
+    <Button x:Name="button我崩潰了"
+            Text="按下我，就會崩潰了"
+            Clicked="Onbutton我崩潰了Clicked"
+            />
+    <Button x:Name="button我有話要說"
+           Text="我有話要說"
+           Clicked="Onbutton我有話要說Clicked"
+            />
+  </StackLayout>
+
+</ContentPage>

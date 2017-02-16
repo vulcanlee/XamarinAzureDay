@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+                        x:Class="XFDoggy.App">
+  <Application.Resources>
+    <!-- Application resource dictionary -->
+    <ResourceDictionary>
+      <Color x:Key="PageBackgroundColor">#FFEFD4</Color>
+      <Color x:Key="ToolbarBackgroundColor">#f08915</Color>
+      <Color x:Key="BottomCommandBackgroundColor">#ffcc92</Color>
+      <Color x:Key="ButtonTextColor">#fff</Color>
+    </ResourceDictionary>
+  </Application.Resources>
+</prism:PrismApplication>

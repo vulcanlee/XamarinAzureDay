@@ -1,0 +1,141 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Xamarin ",
+		"_postman_id": "e42806fe-37e2-e7a9-f830-d129f1fd3f23",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/user",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/User",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/TravelExpensesCategory",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/TravelExpensesCategory",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/User/Auth",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/User/Auth",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"Account\": \"001\",\n    \"Password\": \"901\"\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/TravelExpense",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/TravelExpense",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/TravelExpense",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/TravelExpense",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ID\": 0,\n    \"Account\": \"001\",\n    \"TravelDate\": \"2016/09/16\",\n    \"Category\": \"交通費\",\n    \"Title\": \"去飯店計程車資\",\n    \"Location\": \"機場 > 飯店\",\n    \"Expense\": \"2328.8\",\n    \"Memo\": \"有打折\",\n    \"Domestic\": \"False\",\n    \"HasDocument\": \"True\",\n    \"Updatetime\": \"2016/09/16\"\n}\n\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/TravelExpense",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/TravelExpense",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ID\": 1,\n    \"Account\": \"001\",\n    \"TravelDate\": \"2016/09/16\",\n    \"Category\": \"交通費XX\",\n    \"Title\": \"去飯店計程車資\",\n    \"Location\": \"機場 > 飯店\",\n    \"Expense\": \"100.8\",\n    \"Memo\": \"有打折\",\n    \"Domestic\": \"False\",\n    \"HasDocument\": \"True\",\n    \"Updatetime\": \"2016/09/16\"\n}\n\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/TravelExpense?id=2",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/TravelExpense?id=1",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarindoggy.azurewebsites.net/api/Init",
+			"request": {
+				"url": "http://xamarindoggy.azurewebsites.net/api/Init",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

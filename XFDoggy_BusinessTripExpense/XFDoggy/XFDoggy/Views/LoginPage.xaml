@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.LoginPage">
+
+    <Grid>
+        <!--螢幕背景圖片-->
+        <!--Image 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.Image/-->
+        <Image
+            WidthRequest="150" HeightRequest="150"
+            HorizontalOptions="Center" VerticalOptions="Start"
+            Margin="0,50,0,0"
+            Aspect="Fill"
+            >
+            <Image.Source>
+                <!--OnPlatform 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.OnPlatform%3CT%3E/-->
+                <OnPlatform 
+                    x:TypeArguments="ImageSource"
+                    iOS="Logo.png"
+                    Android="Logo.png"
+                    WinPhone="Assets/Logo.png"
+                    />
+            </Image.Source>
+        </Image>
+
+        <!--StackLayout 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.StackLayout/-->
+        <StackLayout
+            VerticalOptions="Center" HorizontalOptions="Center"
+            Margin="70,150,70,0"
+            >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Label 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Label/-->
+                <Label 
+                    HorizontalOptions="Start" VerticalOptions="Center"
+                    Text="帳號" 
+                    Grid.Row="0" Grid.Column="0"
+                    />
+                <!--Entry 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Entry/-->
+                <Entry
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    Placeholder="請輸入登入帳號" 
+                    Grid.Row="0" Grid.Column="1"
+                    Text="{Binding Account}"
+                    TextColor="Black" />
+                
+                <Label 
+                    HorizontalOptions="Start" VerticalOptions="Center"
+                    Text="密碼" 
+                    Grid.Row="1" Grid.Column="0"
+                    />
+                <Entry 
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    Placeholder="請輸入登入密碼" IsPassword="True" 
+                    Grid.Row="1" Grid.Column="1"
+                    Text="{Binding Password}"
+                    TextColor="Black" />
+
+                <Button 
+                    Text="登入"
+                    Grid.Row="2" Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    BackgroundColor="{StaticResource ToolbarBackgroundColor}"
+                    TextColor="{StaticResource ButtonTextColor}"
+                    Command="{Binding 登入Command}"
+                    />
+
+                <Button 
+                    Text="Facebook 登入"
+                    Grid.Row="3" Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    BackgroundColor="#3B5998"
+                    TextColor="{StaticResource ButtonTextColor}"
+                    Command="{Binding Facebook登入Command}"
+                    />
+
+                <Button 
+                    Text="Google 登入"
+                    Grid.Row="4" Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="Fill" VerticalOptions="Center"
+                    BackgroundColor="##3780F3"
+                    TextColor="{StaticResource ButtonTextColor}"
+                    Command="{Binding Google登入Command}"
+                    />
+            </Grid>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

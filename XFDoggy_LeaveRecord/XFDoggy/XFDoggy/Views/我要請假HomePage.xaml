@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--NavigationPage.BackButtonTitle="上一頁" 這個設定，主要是針對 iOS 平台來使用到的-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+             xmlns:behaviors="clr-namespace:XFDoggy.Behaviors"
+             xmlns:converters="clr-namespace:XFDoggy.Converters"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.我要請假HomePage"
+             Title="我要請假"
+             x:Name="ThisPage"
+             NavigationPage.BackButtonTitle="上一頁">
+
+    <ContentPage.Resources>
+        <!--ResourceDictionary 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ResourceDictionary/-->
+        <ResourceDictionary>
+            <!--在這裡宣告一個數值轉換器 Converter，透過 x:Key 名字，可以在這個頁面中使用
+            若這個數值轉換器在很多頁面都會用到，可以在 App.xaml 中來宣告-->
+            <converters:假別Converter x:Key="假別Converter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!--在導航工具列上，顯示一個可以新增紀錄的按鈕-->
+    <ContentPage.ToolbarItems>
+        <!--新增按鈕-->
+        <ToolbarItem Text="新增" Command="{Binding 點選新增請假紀錄項目Command}" />
+        <ToolbarItem Text="更新" Command="{Binding 點選更新請假紀錄項目Command}" />
+    </ContentPage.ToolbarItems>
+
+    <!--這個頁面的版面配置-->
+    <!--Data Binding 資料繫結請參考：https://developer.xamarin.com/guides/xamarin-forms/xaml/xaml-basics/data_bindings_to_mvvm/-->
+    <Grid
+        RowSpacing="0" ColumnSpacing="0"
+        BackgroundColor="{StaticResource 頁面背景Color}"
+        >
+        <!--該頁面的主要背景顏色設定-->
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            Margin="10"
+            BackgroundColor="{StaticResource 頁面內容本文背景Color}"
+            >
+            <Grid.RowDefinitions>
+                <!--這個部分為頁面標題與文字的空間規劃-->
+                <RowDefinition Height="40"/>
+                <!--這個部分是其他內容區域-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--頁面標題與文字-->
+            <Grid
+                RowSpacing="0" ColumnSpacing="0"
+                BackgroundColor="{StaticResource 頁面內容標題背景Color}"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Text="請假記錄清單"                    
+                    Style="{StaticResource 頁面內文標題文字Style}"
+                    />
+            </Grid>
+
+            <!--清單資料-->
+            <!--ListView 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ListView/-->
+            <ListView
+                HorizontalOptions="Fill" VerticalOptions="Fill"
+                Grid.Row="1"
+                ItemsSource="{Binding 請假紀錄項目清單}"
+                SelectedItem="{Binding 點選請假紀錄項目, Mode=TwoWay}"
+                SeparatorVisibility="None"
+                HasUnevenRows="True"
+                >
+                <!--這個部分為要使用 MVVM 綁定命令方式，將要透過 XAML Behavior來做到-->
+                <!--Xamarin.Forms Behavior 請參考：https://developer.xamarin.com/guides/xamarin-forms/behaviors/-->
+                <ListView.Behaviors>
+                    <behaviors:EventHandlerBehavior EventName="ItemTapped">
+                        <behaviors:InvokeCommandAction Command="{Binding 點選請假紀錄項目Command}"  />
+                    </behaviors:EventHandlerBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <!--定義每筆紀錄要出現的樣貌-->
+                    <DataTemplate>
+                        <!--ViewCell 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ViewCell/-->
+                        <ViewCell>
+                            <Grid
+                                RowSpacing="0" ColumnSpacing="0"
+                                >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--最左方的假別-->
+                                <Grid
+                                    RowSpacing="0" ColumnSpacing="0"
+                                    Grid.Row="0" Grid.Column="0"
+                                    Grid.RowSpan="2"
+                                    >
+                                    <BoxView
+                                        HorizontalOptions="Fill" VerticalOptions="Fill"
+                                        Color="Black"/>
+                                    <localControls:FontAwesomeLabel 
+                                        Text="{Binding 假別, Converter={StaticResource 假別Converter}}"
+                                        Font="36"
+                                        TextColor="White"
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        />
+                                </Grid>
+
+                                <!--請假日期-->
+                                <Grid
+                                    RowSpacing="0" ColumnSpacing="0"
+                                    Grid.Row="0" Grid.Column="1"
+                                    >
+                                    <Label
+                                        Margin="10,0"
+                                        Text="{Binding 請假日期, StringFormat='{0:yyyy-MM-dd}'}"
+                                        TextColor="Black"
+                                        FontSize="24"
+                                        HorizontalOptions="Start" VerticalOptions="Start"
+                                        LineBreakMode="WordWrap">
+                                    </Label>
+                                </Grid>
+
+                                <!--開始時間-->
+                                <Grid
+                                    RowSpacing="0" ColumnSpacing="0"
+                                    Grid.Row="1" Grid.Column="1"
+                                    >
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Spacing="0"
+                                        >
+                                        <Label
+                                            Margin="10,0"
+                                            Text="{Binding 開始時間, StringFormat='{0}'}"
+                                            TextColor="Black"
+                                            FontSize="24"
+                                            HorizontalOptions="Start" VerticalOptions="Start"
+                                            >
+                                        </Label>
+                                        <Label
+                                            Margin="10,0"
+                                            Text="{Binding 請假時數, StringFormat='{0}小時'}}"
+                                            TextColor="Black"
+                                            FontSize="24"
+                                            HorizontalOptions="Start" VerticalOptions="Start"
+                                            >
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+
+                                <!--分隔線-->
+                                <BoxView 
+                                    Grid.Row="0" Grid.Column="0"
+                                    Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                    HorizontalOptions="Fill" VerticalOptions="End"
+                                    HeightRequest="2"
+                                    Color="#8c8c8c" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

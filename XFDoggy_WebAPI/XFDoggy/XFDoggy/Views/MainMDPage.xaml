@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="XFDoggy.Views.MainMDPage">
+
+  <MasterDetailPage.Master >
+    <ContentPage Title="功能表" Icon="hamburger.png">
+      <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                  iOS="0,20,0,0" Android="0" WinPhone="0,0"
+                  />
+      </ContentPage.Padding>
+
+      <ContentPage.Resources>
+        <ResourceDictionary>
+          <Style x:Key="MenuItemLevel1Style" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="35,10,0,0" />
+          </Style>
+          <Style x:Key="MenuItemLevel2Style" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="Margin" Value="60,10,0,0" />
+          </Style>
+        </ResourceDictionary>
+      </ContentPage.Resources>
+      <StackLayout
+        Orientation="Vertical" BackgroundColor="White"
+        VerticalOptions="FillAndExpand">
+
+        <Grid>
+          <Image>
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="sidebar.png"/>
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="sidebar.png"/>
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="Assets/Images/sidebar.png"/>
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </Image.Source>
+          </Image>
+
+          <Image Margin="15,15,0,0"
+                 WidthRequest="64" HeightRequest="64"
+                 Aspect="Fill"
+                 HorizontalOptions="Start" VerticalOptions="Start"
+            >
+            <Image.Source>
+              <OnPlatform x:TypeArguments="ImageSource">
+                <OnPlatform.iOS>
+                  <FileImageSource File="Logo.png"/>
+                </OnPlatform.iOS>
+                <OnPlatform.Android>
+                  <FileImageSource File="Logo.png"/>
+                </OnPlatform.Android>
+                <OnPlatform.WinPhone>
+                  <FileImageSource File="Assets/Images/Logo.png"/>
+                </OnPlatform.WinPhone>
+              </OnPlatform>
+            </Image.Source>
+          </Image>
+
+          <Label Text="多奇數位創意有限公司" TextColor="White" FontSize="18"
+                 HorizontalOptions="Start" VerticalOptions="End"
+                 Margin="15,0,0,15"
+                 />
+        </Grid>
+        <Label
+          Margin="35,30,0,0"
+          Text ="差旅費用申請"
+          Style="{StaticResource MenuItemLevel1Style}"
+          TextColor="{Binding 差旅費用申請Color}"
+          >
+          <Label.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding 差旅費用申請Command}"/>
+          </Label.GestureRecognizers>
+        </Label>
+        <Label
+          Text ="登出"
+          Style="{StaticResource MenuItemLevel1Style}"
+          TextColor="{Binding 登出Color}"
+          >
+          <Label.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding 登出Command}"/>
+          </Label.GestureRecognizers>
+        </Label>
+
+      </StackLayout>
+    </ContentPage>
+  </MasterDetailPage.Master>
+
+</MasterDetailPage>

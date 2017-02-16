@@ -1,0 +1,147 @@
+{
+	"variables": [],
+	"info": {
+		"name": "XamarinAzureDay",
+		"_postman_id": "3728397d-ad0d-843e-f26e-b536dcda19be",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:50520/tables/todoitem",
+			"request": {
+				"url": "http://localhost:50520/tables/todoitem",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:50520/tables/BusinessTripExpense",
+			"request": {
+				"url": "http://localhost:50520/tables/BusinessTripExpense",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarinazureday.azurewebsites.net/tables/todoitem",
+			"request": {
+				"url": "https://xamarinazureday.azurewebsites.net/tables/todoitem",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarinazureday.azurewebsites.net/tables/BusinessTripExpense",
+			"request": {
+				"url": "https://xamarinazureday.azurewebsites.net/tables/BusinessTripExpense",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:50520/tables/LeaveRecord",
+			"request": {
+				"url": "http://localhost:50520/tables/LeaveRecord",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarinazureday.azurewebsites.net/tables/LeaveRecord",
+			"request": {
+				"url": "https://xamarinazureday.azurewebsites.net/tables/LeaveRecord",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:50520/tables/WorkLog",
+			"request": {
+				"url": "http://localhost:50520/tables/WorkLog",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://xamarinazureday.azurewebsites.net/tables/WorkLog",
+			"request": {
+				"url": "http://xamarinazureday.azurewebsites.net/tables/WorkLog",
+				"method": "GET",
+				"header": [
+					{
+						"key": "ZUMO-API-VERSION",
+						"value": "2.0.0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

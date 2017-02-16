@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Behaviors;assembly=Behaviors"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.TravelExpensesListPage"
+             BackgroundColor="{StaticResource PageBackgroundColor}"
+             Title="差旅費用"
+             >
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem
+      Command="{Binding 新增Command}"
+      Text="新增"
+      Order="Primary"
+      Priority="0">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource"
+                     iOS="Add.png"
+                     Android="Add.png"
+                     WinPhone="Assets/Images/Add.png" />  
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
+
+  <ListView 
+    ItemsSource="{Binding MyData}"
+    SelectedItem="{Binding MyDataSelected, Mode=TwoWay}"
+    Margin="20,20"
+    IsPullToRefreshEnabled="True"
+    RefreshCommand="{Binding 更新資料Command}"
+    IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+    BackgroundColor="Transparent"
+      >
+    <ListView.Behaviors>
+      <behaviors:EventHandlerBehavior EventName="ItemTapped">
+        <behaviors:InvokeCommandAction Command="{Binding MyDataClickedCommand}"  />
+      </behaviors:EventHandlerBehavior>
+    </ListView.Behaviors>
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <Grid
+              >
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                FontSize="14"
+                Text="{Binding Title}"
+                TextColor="#494849"
+                VerticalOptions="Center"
+                     />
+              <Label Grid.Column="1"
+                FontSize="14"
+                Text="{Binding TravelDate, StringFormat='{0:yyyy-MM-dd}'}"
+                TextColor="#494849"
+                VerticalOptions="Center"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+
+</ContentPage>

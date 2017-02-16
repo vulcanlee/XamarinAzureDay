@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="XFHocKey.LoginPage">
+  <ContentPage.Padding>30</ContentPage.Padding>
+  <StackLayout
+    Orientation="Vertical"
+    VerticalOptions="Center"
+    >
+
+    <Label x:Name="label錯誤提示"
+           TextColor="Red"
+           FontSize="24"
+           HorizontalOptions="Center"
+           IsVisible="False"
+           />
+    
+    <Label Text="帳號" />
+    <Entry x:Name="entry帳號"
+           Placeholder="請輸入登入帳號"
+           />
+    <Label Text="密碼" />
+    <Entry x:Name="entry密碼"
+           Placeholder="請輸入登入密碼"
+           IsPassword="True"
+           />
+
+    <Button x:Name="button登入"
+            Text="登入"
+            Clicked="Onbutton登入Clicked"/>
+  </StackLayout>
+</ContentPage>

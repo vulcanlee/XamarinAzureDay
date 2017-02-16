@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{StaticResource PageBackgroundColor}"
+             x:Class="XFDoggy.Views.LoginPage">
+
+  <Grid>
+    <StackLayout
+      VerticalOptions="Center" HorizontalOptions="Center"
+      Margin="70,0"
+      >
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition />
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="35"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="帳號" Grid.Row="0" Grid.Column="0"
+               HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Entry Placeholder="請輸入登入帳號" Grid.Row="0" Grid.Column="1"
+               Text="{Binding Account, Mode=TwoWay}"
+               TextColor="Black" />
+        <Label Text="密碼" Grid.Row="1" Grid.Column="0"
+               HorizontalOptions="Start" VerticalOptions="Center"/>
+        <Entry Placeholder="請輸入登入密碼" IsPassword="True" Grid.Row="1" Grid.Column="1"
+               Text="{Binding Password, Mode=TwoWay}"
+               TextColor="Black" />
+
+      </Grid>
+      <Button Text="登入" 
+             Margin="0,40,0,0"
+             HorizontalOptions="Center"
+             BackgroundColor="{StaticResource ToolbarBackgroundColor}"
+             TextColor="{StaticResource ButtonTextColor}"
+             Command="{Binding 登入Command}"
+             WidthRequest="200"
+                />
+    </StackLayout>
+  </Grid>
+
+</ContentPage>

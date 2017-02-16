@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+                        x:Class="XFDoggy.App">
+
+    <Application.Resources>
+        <!-- Application resource dictionary -->
+        <!--ResourceDictionary 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ResourceDictionary/-->
+        <ResourceDictionary>
+            <!--這裡定義這個應用系統中，美個頁面、控制項、版面配置可用到的顏色資源-->
+            <Color x:Key="PageBackgroundColor">#FFEFD4</Color>
+            <Color x:Key="ToolbarBackgroundColor">#f08915</Color>
+            <Color x:Key="BottomCommandBackgroundColor">#ffcc92</Color>
+            <Color x:Key="ButtonTextColor">#fff</Color>
+            <Color x:Key="頁面背景Color">#EAEAEA</Color>
+            <Color x:Key="頁面內容標題背景Color">#ffe0b7</Color>
+            <Color x:Key="頁面內容標題文字Color">#99000000</Color>
+            <Color x:Key="頁面內容本文背景Color">#fff</Color>
+
+            <!--這裡定義這個應用系統中，美個頁面、控制項、版面配置可用到的Label樣式資源-->
+            <Style x:Key="頁面內文標題文字Style" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="20" />
+                <!--這個樣式屬性值，使用靜態資源綁定方式-->
+                <Setter Property="TextColor" Value="{StaticResource 頁面內容標題文字Color}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</prism:PrismApplication>

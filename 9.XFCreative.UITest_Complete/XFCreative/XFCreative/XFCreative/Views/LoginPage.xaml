@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFCreative.Views.LoginPage">
+
+  <StackLayout
+    Margin="40,0,40,0"
+    VerticalOptions="Center"
+    Orientation="Vertical">
+    <Label Text="請輸入您的帳號與密碼" />
+    <Entry Text="{Binding Account, Mode=TwoWay}" AutomationId="enyAccount" />
+    <Entry Text="{Binding Password, Mode=TwoWay}" AutomationId="enyPassword"/>
+    <Button Text="登入" Command="{Binding LoginCommand}" AutomationId="btnLoginCommand"/>
+  </StackLayout>
+</ContentPage>

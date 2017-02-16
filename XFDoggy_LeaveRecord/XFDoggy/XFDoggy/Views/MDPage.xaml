@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="XFDoggy.Views.MDPage"                  
+                  IsGestureEnabled="{Binding 漢堡按鈕顯示}">
+
+    <MasterDetailPage.Resources>
+        <!--透過資源字典的使用，可以簡化XAML的設定內容，並且讓 XAML 維護上變得更有彈性與方便-->
+        <!--ResourceDictionary 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ResourceDictionary/-->
+        <ResourceDictionary>
+            <!--這裡定義一個功能表項目圖示(Font Awesome字體圖示)會用到的樣式定義-->
+            <Style x:Key="MenuItemIconStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+            <!--這裡定義一個功能表項目文字會用到的樣式定義-->
+            <Style x:Key="MenuItemLevel1Style" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+            <!--這裡定義一個功能表項目會用到的半面配置樣式定義-->
+            <Style x:Key="MenuItemStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="0,15" />
+            </Style>
+        </ResourceDictionary>
+    </MasterDetailPage.Resources>
+
+    <MasterDetailPage.Master>
+        <!--這裡定義了彈出式導航抽屜面板的樣貌-->
+        <ContentPage Title="Main">
+            <!--Icon 屬性請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.Page/-->
+            <ContentPage.Icon>
+                <OnPlatform 
+                    x:TypeArguments="FileImageSource"
+                    iOS="hamburger.png"
+                    Android="hamburger.png"
+                    WinPhone="Assets/hamburger.png"
+                    />
+            </ContentPage.Icon>
+            <StackLayout
+                Orientation="Vertical" BackgroundColor="#FFDBB5"
+                VerticalOptions="FillAndExpand"
+                Spacing="0"
+                >
+
+                <!--這裡定義了導航抽屜的最上方的公司識別圖示與名稱-->
+                <Grid
+                    RowSpacing="0" ColumnSpacing="0"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="170" />
+                    </Grid.RowDefinitions>
+                    <!--Image 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.Image/-->
+                    <Image
+                        Aspect="Fill"
+                        HorizontalOptions="Fill" VerticalOptions="Fill"
+                        >
+                        <Image.Source>
+                            <!--OnPlatform 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.OnPlatform%3CT%3E/-->
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <OnPlatform.iOS>
+                                    <FileImageSource File="sidebar.png"/>
+                                </OnPlatform.iOS>
+                                <OnPlatform.Android>
+                                    <FileImageSource File="sidebar.png"/>
+                                </OnPlatform.Android>
+                                <OnPlatform.WinPhone>
+                                    <FileImageSource File="Assets/sidebar.png"/>
+                                </OnPlatform.WinPhone>
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+
+                    <Image Margin="15,15,0,0"
+                           WidthRequest="64" HeightRequest="64"
+                           Aspect="Fill"
+                           HorizontalOptions="Start" VerticalOptions="Start"
+                           >
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <OnPlatform.iOS>
+                                    <FileImageSource File="Logo.png"/>
+                                </OnPlatform.iOS>
+                                <OnPlatform.Android>
+                                    <FileImageSource File="Logo.png"/>
+                                </OnPlatform.Android>
+                                <OnPlatform.WinPhone>
+                                    <FileImageSource File="Assets/Logo.png"/>
+                                </OnPlatform.WinPhone>
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+
+                    <Label
+                        Text="多奇數位創意有限公司" TextColor="#BBFFFFFF" FontSize="28" FontAttributes="Bold"
+                        HorizontalOptions="Start" VerticalOptions="End"
+                        Margin="15,0,0,15"
+                        />
+                </Grid>
+
+                <!--這裡定義了每個功能表的項目與相關手勢操作命令綁定-->
+                <ScrollView
+                    Margin="30,30,30,0"
+                    Orientation="Vertical">
+                    <StackLayout
+                        Orientation="Vertical">
+
+                        <!--差旅費用申請-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf072;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding 差旅費用申請Color}"
+                                />
+                            <Label
+                                Text ="差旅費用申請"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding 差旅費用申請Color}"
+                                >
+                                <!--GestureReconizers 請參考：https://developer.xamarin.com/api/property/Xamarin.Forms.View.GestureRecognizers/-->
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 差旅費用申請Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <!--我要請假-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf0f8;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding 我要請假Color}"
+                                />
+                            <Label
+                                Text ="我要請假"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding 我要請假Color}"
+                                >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 我要請假Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <!--填寫工作日報表-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf03a;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding 填寫工作日報表Color}"
+                                />
+                            <Label
+                                Text ="填寫工作日報表"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding 填寫工作日報表Color}"
+                                >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 填寫工作日報表Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <!--最新消息-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf1ea;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding 最新消息Color}"
+                                />
+                            <Label
+                                Text ="最新消息"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding 最新消息Color}"
+                                >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 最新消息Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <!--OnCall電話-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf095;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding OnCall電話Color}"
+                                />
+                            <Label
+                                Text ="On-Call電話"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding OnCall電話Color}"
+                                >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding OnCall電話Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <!--關於-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf05a;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding 關於Color}"
+                                />
+                            <Label
+                                Text ="關於"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding 關於Color}"
+                                >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 關於Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <!--登出-->
+                        <StackLayout
+                            Style="{StaticResource MenuItemStackLayoutStyle}">
+                            <localControls:FontAwesomeLabel 
+                                Text="&#xf08b;"
+                                Style="{StaticResource MenuItemIconStyle}"
+                                TextColor="{Binding 登出Color}"
+                                />
+                            <Label
+                                Text ="登出"
+                                Style="{StaticResource MenuItemLevel1Style}"
+                                TextColor="{Binding 登出Color}"
+                                >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 登出Command}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+
+            </StackLayout>
+
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

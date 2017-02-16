@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.miniasp.dashboard" android:versionCode="3" android:versionName="1.2">
+	<uses-sdk android:minSdkVersion="15" />
+	<application android:label="多奇集團 行動儀表板" android:icon="@drawable/icon"></application>
+</manifest>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--NavigationPage.BackButtonTitle="上一頁" 這個設定，主要是針對 iOS 平台來使用到的-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+             xmlns:behaviors="clr-namespace:XFDoggy.Behaviors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.差旅費用申請HomePage"
+             Title="差旅費用申請"
+             x:Name="ThisPage"
+             NavigationPage.BackButtonTitle="上一頁">
+
+    <!--這個頁面的版面配置-->
+    <!--Data Binding 資料繫結請參考：https://developer.xamarin.com/guides/xamarin-forms/xaml/xaml-basics/data_bindings_to_mvvm/-->
+    <Grid
+        RowSpacing="0" ColumnSpacing="0"
+        BackgroundColor="{StaticResource 頁面背景Color}"
+        >
+        <!--該頁面的主要背景顏色設定-->
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            Margin="10"
+            BackgroundColor="{StaticResource 頁面內容本文背景Color}"
+            >
+            <Grid.RowDefinitions>
+                <!--這個部分為頁面標題與文字的空間規劃-->
+                <RowDefinition Height="40"/>
+                <!--這個部分是其他內容區域-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--頁面標題與文字-->
+            <Grid
+                RowSpacing="0" ColumnSpacing="0"
+                BackgroundColor="{StaticResource 頁面內容標題背景Color}"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Text="差旅費用申請清單"                    
+                    Style="{StaticResource 頁面內文標題文字Style}"
+                    />
+            </Grid>
+
+            <!--清單資料-->
+            <!--ListView 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ListView/-->
+            <ListView
+                HorizontalOptions="Fill" VerticalOptions="Fill"
+                Grid.Row="1"
+                ItemsSource="{Binding 差旅費用項目清單}"
+                SelectedItem="{Binding 點選差旅費用項目, Mode=TwoWay}"
+                SeparatorVisibility="None"
+                HasUnevenRows="True"
+                >
+                <!--這個部分為要使用 MVVM 綁定命令方式，將要透過 XAML Behavior來做到-->
+                <!--Xamarin.Forms Behavior 請參考：https://developer.xamarin.com/guides/xamarin-forms/behaviors/-->
+                <ListView.Behaviors>
+                    <behaviors:EventHandlerBehavior EventName="ItemTapped">
+                        <behaviors:InvokeCommandAction Command="{Binding 點選差旅費用項目Command}"  />
+                    </behaviors:EventHandlerBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <!--定義每筆紀錄要出現的樣貌-->
+                    <DataTemplate>
+                        <!--ViewCell 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ViewCell/-->
+                        <ViewCell>
+                            <Grid
+                                RowSpacing="0" ColumnSpacing="0"
+                                >
+                                <StackLayout
+                                    Orientation="Vertical"
+                                    >
+                                    <Label
+                                        Margin="10,0"
+                                        Text="{Binding 出差日期, StringFormat='{0:yyyy-MM-dd}'}}"
+                                        TextColor="Black"
+                                        FontSize="24"
+                                        HorizontalOptions="Start" VerticalOptions="Start"
+                                        LineBreakMode="WordWrap">
+                                    </Label>
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Margin="0,5">
+                                        <Label
+                                            Margin="10,0,0,0"
+                                            Text="{Binding 類型}"
+                                            TextColor="Black"
+                                            FontSize="14"
+                                            HorizontalOptions="Start" VerticalOptions="Start"
+                                            LineBreakMode="TailTruncation"
+                                            WidthRequest="150">
+                                        </Label>
+                                        <Label
+                                            Margin="10,0,10,0"
+                                            Text="{Binding 費用, StringFormat='{0} 元'}"
+                                            TextColor="Black"
+                                            FontSize="14"
+                                            HorizontalOptions="End" VerticalOptions="Start"
+                                            LineBreakMode="TailTruncation">
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <!--分隔線-->
+                                <BoxView 
+                                    HorizontalOptions="Fill" VerticalOptions="End"
+                                    HeightRequest="2"
+                                    Color="#8c8c8c" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+        <!--新增按鈕-->
+        <!--這裡採用浮動式的按鈕設計-->
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            HorizontalOptions="End" VerticalOptions="End"
+            Margin="0,0,30,30"
+            >
+            <BoxView Color="Black" WidthRequest="50" HeightRequest="50"/>
+            <Image
+                Source="Add.png"
+                WidthRequest="40" HeightRequest="40"
+                HorizontalOptions="Center" VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding 新增按鈕Command}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+    </Grid>
+
+</ContentPage>
