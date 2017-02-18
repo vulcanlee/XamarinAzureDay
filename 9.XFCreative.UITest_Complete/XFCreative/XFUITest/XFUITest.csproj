@@ -64,5 +64,11 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XFCreative\XFCreative.Droid\XFCreative.Droid.csproj">
+      <Project>{8f2a9e80-3570-4182-982d-09418063f794}</Project>
+      <Name>XFCreative.Droid</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

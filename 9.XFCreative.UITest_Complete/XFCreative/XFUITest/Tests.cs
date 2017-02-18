@@ -25,7 +25,7 @@ namespace XFUITest
             app = AppInitializer.StartApp(platform);
 
             // 解開底下這行註解，則會進入到 REPL  (read-eval-print-loop)
-            app.Repl();
+            //app.Repl();
         }
 
         [Test]
