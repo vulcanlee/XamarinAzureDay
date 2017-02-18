@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+             xmlns:behaviors="clr-namespace:XFDoggy.Behaviors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.差旅費用申請紀錄修改Page"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <!--ResourceDictionary 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ResourceDictionary/-->
+        <ResourceDictionary>
+            <!--Style 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Style/-->
+            <Style x:Key="標題文字Style" TargetType="Label">
+                <!--定義屬性的一種方式，將要定義的值，直接寫在開放標籤之間-->
+                <Setter Property="Margin">10,0</Setter>
+                <!--定義屬性的一種方式，將要定義的值，寫在封閉標籤的 Value 屬性內-->
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!--這個頁面的版面配置-->
+    <!--Grid 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Grid/-->
+    <Grid
+        RowSpacing="0" ColumnSpacing="0"
+        BackgroundColor="{StaticResource 頁面背景Color}"
+        >
+        <!--該頁面的主要背景顏色設定-->
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            Margin="10"
+            BackgroundColor="{StaticResource 頁面內容本文背景Color}"
+            >
+            <Grid.RowDefinitions>
+                <!--這個部分為頁面標題與文字的空間規劃-->
+                <RowDefinition Height="40"/>
+                <!--這個部分是其他內容區域-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--頁面標題與文字-->
+            <Grid
+                RowSpacing="0" ColumnSpacing="0"
+                BackgroundColor="{StaticResource 頁面內容標題背景Color}"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Text="差旅費用申請明細"                    
+                    Style="{StaticResource 頁面內文標題文字Style}"
+                    />
+            </Grid>
+
+            <!--資料欄位明細-->
+            <!--ScrollView  用法 :https://developer.xamarin.com/api/type/Xamarin.Forms.ScrollView/-->
+            <ScrollView
+                Orientation="Vertical"
+                Grid.Row="1"
+                >
+                <!--StackLayout 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.StackLayout/-->
+                <StackLayout
+                    Orientation="Vertical"
+                    Spacing="0"
+                    >
+
+                    <!--項目名稱-->
+                    <!--Label 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Label/-->
+                    <Label
+                        Text="項目名稱"
+                        Margin="10,20,10,0"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <!--Entry 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Entry/-->
+                    <Entry
+                        HorizontalOptions="Fill" VerticalOptions="Start"
+                        Margin="10,0"
+                        Text="{Binding 差旅費用項目紀錄.項目名稱}" />
+                    <!--分隔線-->
+                    <!--BoxView 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--類型-->
+                    <Label
+                        Text="類型"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <Entry
+                        HorizontalOptions="Fill" VerticalOptions="Start"
+                        Margin="10,0"
+                        Text="{Binding 差旅費用項目紀錄.類型}" />
+                    <!--分隔線-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--出差日期-->
+                    <Label
+                        Text="出差日期"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <!--DatePicker 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.DatePicker/-->
+                    <DatePicker
+                        HorizontalOptions="Fill" VerticalOptions="Start"
+                        Margin="10,0"
+                        Date="{Binding 差旅費用項目紀錄.出差日期}" 
+                        Format="yyyy-MM-dd"
+                        />
+                    <!--分隔線-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--地點-->
+                    <Label
+                        Text="地點"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <Entry
+                        HorizontalOptions="Fill" VerticalOptions="Start"
+                        Margin="10,0"
+                        Text="{Binding 差旅費用項目紀錄.地點}" />
+                    <!--分隔線-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--費用-->
+                    <Label
+                        Text="費用"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <!--可用的 Keyboar 請參考 https://developer.xamarin.com/api/type/Xamarin.Forms.Keyboard/-->
+                    <Entry
+                        HorizontalOptions="Fill" VerticalOptions="Start"
+                        Margin="10,0"
+                        Text="{Binding 差旅費用項目紀錄.費用}"
+                        Keyboard="Numeric"
+                        />
+                    <!--分隔線-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--國內外-->
+                    <Label
+                        Text="國內出差"
+                        HorizontalOptions="Start" VerticalOptions="Center"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <!--Switch 用法 ：https://developer.xamarin.com/api/type/Xamarin.Forms.Switch/-->
+                    <Switch
+                        IsToggled="{Binding 差旅費用項目紀錄.國內外}"
+                        Margin="10,0"
+                        HorizontalOptions="End" VerticalOptions="Center"/>
+                    <!--分隔線-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--是否有單據-->
+                    <Label
+                        Text="是否有單據"
+                        HorizontalOptions="Start" VerticalOptions="Center"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <!--Switch 用法 ：https://developer.xamarin.com/api/type/Xamarin.Forms.Switch/-->
+                    <Switch
+                        IsToggled="{Binding 差旅費用項目紀錄.是否有單據}"
+                        Margin="10,0"
+                        HorizontalOptions="End" VerticalOptions="Center"/>
+                    <!--分隔線-->
+                    <BoxView Margin="0,10" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+
+                    <!--備註-->
+                    <Label
+                        Text="備註"
+                        Style="{StaticResource 標題文字Style}"/>
+                    <!--Editor 用法 ：https://developer.xamarin.com/api/type/Xamarin.Forms.Editor/-->
+                    <Editor
+                        HorizontalOptions="Fill" VerticalOptions="Start"
+                        Margin="10,0"
+                        HeightRequest="250"
+                        Text="{Binding 差旅費用項目紀錄.備註}"
+                        />
+
+                    <Grid
+                        RowSpacing="0" ColumnSpacing="0"
+                        Margin="0,30,0,0"
+                        >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Button 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.Button/-->
+                        <Button
+                            Grid.Column="0"
+                            Margin="0,0,5,0"
+                            Text="刪除"
+                            TextColor="White"
+                            FontSize="16"
+                            BackgroundColor="#ff4772"
+                            Command="{Binding 刪除按鈕Command}"
+                            />
+                        <Button
+                            Grid.Column="{Binding 儲存按鈕的ColumnID}"
+                            Grid.ColumnSpan="{Binding 儲存按鈕的ColumnSpan}"
+                            Margin="{Binding 儲存按鈕Margin}"
+                            Text="儲存"
+                            TextColor="Black"
+                            FontSize="16"
+                            BackgroundColor="#1cbc1e"
+                            Command="{Binding 儲存按鈕Command}"
+                            />
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </Grid>
+
+</ContentPage>

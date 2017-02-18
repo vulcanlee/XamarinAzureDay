@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--NavigationPage.BackButtonTitle="上一頁" 這個設定，主要是針對 iOS 平台來使用到的-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+             xmlns:behaviors="clr-namespace:XFDoggy.Behaviors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.最新消息HomePage"
+             Title="最新消息"
+             x:Name="ThisPage"
+             NavigationPage.BackButtonTitle="上一頁">
+
+    <!--這個頁面的版面配置-->
+    <Grid
+        RowSpacing="0" ColumnSpacing="0"
+        BackgroundColor="{StaticResource 頁面背景Color}"
+        >
+        <!--該頁面的主要背景顏色設定-->
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            Margin="10"
+            BackgroundColor="{StaticResource 頁面內容本文背景Color}"
+            >
+            <Grid.RowDefinitions>
+                <!--這個部分為頁面標題與文字的空間規劃-->
+                <RowDefinition Height="40"/>
+                <!--這個部分是其他內容區域-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--頁面標題與文字-->
+            <Grid
+                RowSpacing="0" ColumnSpacing="0"
+                BackgroundColor="{StaticResource 頁面內容標題背景Color}"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Text="多奇數位創意 最新公布消息清單"                    
+                    Style="{StaticResource 頁面內文標題文字Style}"
+                    />
+            </Grid>
+
+            <!--清單資料-->
+            <!--
+            IsPullToRefreshEnabled 用來啟用手勢下拉更新功能
+            RefreshCommand 當使用者完成下拉更新手勢操作之後，會執行 RefreshCommand 命令
+            IsRefreshing 用來在螢幕上顯示是否會有正在更新的動畫
+            -->
+            <ListView 
+                HorizontalOptions="Fill" VerticalOptions="Fill"
+                Grid.Row="1"
+                ItemsSource="{Binding 最新消息清單}"
+                SeparatorVisibility="None"
+                HasUnevenRows="False"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding Refresh最新消息清單Command}"
+                IsRefreshing="{Binding 正在進行清單資料更新}"
+                >
+                <ListView.Behaviors>
+                    <!--這裡綁定了當 ListView 有紀錄要顯示在螢幕上的時候，這個事件 ItemAppearing 被呼叫時候，要去執行 ItemAppearingCommand 命令-->
+                    <behaviors:EventHandlerBehavior EventName="ItemAppearing">
+                        <behaviors:InvokeCommandAction Command="{Binding ItemAppearingCommand}"  />
+                    </behaviors:EventHandlerBehavior>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <!--定義每筆紀錄要出現的樣貌-->
+                    <DataTemplate>
+                        <!--ViewCell 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ViewCell/-->
+                        <ViewCell>
+                            <!--ContextActions 請參考：https://developer.xamarin.com/api/property/Xamarin.Forms.Cell.ContextActions/-->
+                            <ViewCell.ContextActions>
+                                <!--MenuItem 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.MenuItem/-->
+                                <!--底下透過了 Path & Source，指定要綁定的命令是來自於這個頁面的 ViewModel 的 Command-->
+                                <MenuItem Text="選取" Command="{Binding Path=BindingContext.選取Command, Source={x:Reference ThisPage}}" CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
+                            <Grid
+                                RowSpacing="0" ColumnSpacing="0"
+                                >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+
+                                <Label
+                                    Text="{Binding 名稱}"
+                                    TextColor="Blue"
+                                    FontSize="18"
+                                    HorizontalOptions="Start" VerticalOptions="Center"
+                                    Margin="10,0"/>
+
+                                <!--分隔線-->
+                                <BoxView 
+                                    Grid.Row="0" Grid.Column="0"
+                                    HeightRequest="2"
+                                    HorizontalOptions="Fill" VerticalOptions="End"
+                                    Color="#8c8c8c" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            IsVisible="{Binding 顯示忙碌中遮罩}"
+            >
+            <BoxView Color="#AA000000" />
+            <Label
+                Text="請稍後..."
+                HorizontalOptions="Center" VerticalOptions="Center"
+                TextColor="White"
+                FontSize="Large" />
+        </Grid>
+    </Grid>
+
+</ContentPage>
