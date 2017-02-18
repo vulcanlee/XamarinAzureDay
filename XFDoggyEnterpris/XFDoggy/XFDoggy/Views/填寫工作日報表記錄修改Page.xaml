@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--使用 NavigationPage.HasBackButton 來控制這個頁面不要顯示回上一頁按鈕，請且透過 code behind 控制實體按鍵也無法回上一頁
+Title 使用Data Binding方法，動態顯示現在這筆紀錄是在修改還是在新增狀態-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:localControls="clr-namespace:XFDoggy.CustomControls"
+             xmlns:behaviors="clr-namespace:XFDoggy.Behaviors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFDoggy.Views.填寫工作日報表記錄修改Page"
+             Title="{Binding Title}"
+             NavigationPage.HasBackButton="False"
+             >
+
+    <ContentPage.Resources>
+        <!--ResourceDictionary 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.ResourceDictionary/-->
+        <ResourceDictionary>
+            <!--Style 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Style/-->
+            <Style x:Key="標題文字Style" TargetType="Label">
+                <!--定義屬性的一種方式，將要定義的值，直接寫在開放標籤之間-->
+                <Setter Property="Margin">10,0</Setter>
+                <!--定義屬性的一種方式，將要定義的值，寫在封閉標籤的 Value 屬性內-->
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="儲存" Command="{Binding 儲存按鈕Command}"/>
+        <!--這裡設定取消按鈕不要顯示出來，需要點選更多功能，才能夠顯示出來-->
+        <ToolbarItem Text="取消" Command="{Binding 取消按鈕Command}"/>
+    </ContentPage.ToolbarItems>
+
+    <!--這個頁面的版面配置-->
+    <!--Grid 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Grid/-->
+    <Grid
+        RowSpacing="0" ColumnSpacing="0"
+        BackgroundColor="{StaticResource 頁面背景Color}"
+        >
+        <!--該頁面的主要背景顏色設定-->
+        <Grid
+            RowSpacing="0" ColumnSpacing="0"
+            Margin="10"
+            BackgroundColor="{StaticResource 頁面內容本文背景Color}"
+            >
+            <Grid.RowDefinitions>
+                <!--這個部分為頁面標題與文字的空間規劃-->
+                <RowDefinition Height="40"/>
+                <!--這個部分是其他內容區域-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--頁面標題與文字-->
+            <Grid
+                RowSpacing="0" ColumnSpacing="0"
+                BackgroundColor="{StaticResource 頁面內容標題背景Color}"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Text="工作日報明細"                    
+                    Style="{StaticResource 頁面內文標題文字Style}"
+                    />
+            </Grid>
+
+            <!--資料欄位明細-->
+            <Grid
+                HorizontalOptions="Fill" VerticalOptions="Fill"
+                Grid.Row="1"
+                RowSpacing="0" ColumnSpacing="0"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--ScrollView  用法 :https://developer.xamarin.com/api/type/Xamarin.Forms.ScrollView/-->
+                <ScrollView
+                    Orientation="Vertical"
+                    Grid.Row="0"
+                    >
+                    <!--StackLayout 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.StackLayout/-->
+                    <StackLayout
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Spacing="0"
+                        >
+
+                        <!--日期-->
+                        <Grid
+                            RowSpacing="0" ColumnSpacing="0"
+                            >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--Label 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Label/-->
+                            <Label
+                                Grid.Column="0"
+                                Text="日期"
+                                Margin="10,0"
+                                Style="{StaticResource 標題文字Style}"/>
+
+                            <DatePicker
+                                Grid.Column="1"
+                                HorizontalOptions="Fill" VerticalOptions="Center"
+                                Date="{Binding 工作日報表項目.日期}"
+                                Format="yyyy-MM-dd"/>
+
+                            <!--分隔線-->
+                            <!--BoxView 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/-->
+                            <BoxView Grid.ColumnSpan="2" Margin="0,0" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+                        </Grid>
+
+                        <!--專案名稱-->
+                        <Grid
+                        RowSpacing="0" ColumnSpacing="0"
+                        >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Text="專案名稱"
+                                Margin="10,0"
+                                Style="{StaticResource 標題文字Style}"/>
+
+                            <!--Entry 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Entry/-->
+                            <Entry
+                                Grid.Column="1"
+                                HorizontalOptions="Fill" VerticalOptions="Center"
+                                Placeholder="請輸入專案名稱"
+                                Text="{Binding 工作日報表項目.專案名稱}" />
+
+
+                            <!--分隔線-->
+                            <!--BoxView 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/-->
+                            <BoxView Grid.ColumnSpan="2" Margin="0,0" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+                        </Grid>
+
+                        <!--請假時數-->
+                        <Grid
+                            RowSpacing="0" ColumnSpacing="0"
+                            >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Text="處理時間"
+                                Margin="10,0"
+                                Style="{StaticResource 標題文字Style}"/>
+
+                            <!--Entry 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Entry/-->
+                            <Entry
+                                Grid.Column="1"
+                                HorizontalOptions="Fill" VerticalOptions="Center"
+                                Placeholder="請輸入共花費多少小時"
+                                Text="{Binding 工作日報表項目.處理時間}"
+                                Keyboard="Numeric"/>
+
+
+                            <!--分隔線-->
+                            <!--BoxView 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/-->
+                            <BoxView Grid.ColumnSpan="2" Margin="0,0" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+                        </Grid>
+
+                        <!--工作內容-->
+                        <Grid
+                        RowSpacing="0" ColumnSpacing="0"
+                        >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="320" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Text="工作內容"
+                                Margin="10,10"
+                                HorizontalOptions="Start" VerticalOptions="Start"
+                                Style="{StaticResource 標題文字Style}"/>
+
+                            <!--Entry 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.Entry/-->
+                            <Editor
+                                Grid.Column="1"
+                                HorizontalOptions="Fill" VerticalOptions="Fill"
+                                HeightRequest="300"
+                                Text="{Binding 工作日報表項目.工作內容}" />
+
+
+                            <!--分隔線-->
+                            <!--BoxView 用法 : https://developer.xamarin.com/api/type/Xamarin.Forms.BoxView/-->
+                            <BoxView Grid.ColumnSpan="2" Margin="0,0" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="1" Color="#8c8c8c" />
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+
+                <Grid
+                    Grid.Row="1"
+                    RowSpacing="0" ColumnSpacing="0"
+                    Margin="0,0"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <!--這裡使用 public DelegateCommand(Action executeMethod, Func<bool>canExecuteMethod);
+                    來控制這個按鈕是否可以被執行-->
+                    <!--Button 請參考：https://developer.xamarin.com/api/type/Xamarin.Forms.Button/-->
+                    <Button
+                        Grid.Column="0"
+                        Margin="10,0"
+                        Text="刪除"
+                        TextColor="White"
+                        FontSize="16"
+                        BackgroundColor="#ff4772"
+                        Command="{Binding Can刪除按鈕Command}"
+                        />
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+
+
+</ContentPage>
