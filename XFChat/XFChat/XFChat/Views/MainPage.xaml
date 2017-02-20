@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:TemplateSelectors="clr-namespace:XFChat.TemplateSelectors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XFChat.Views.MainPage"
+             Title="MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="OtherChatTemplate" >
+                <ViewCell>
+                    <Grid
+                            HorizontalOptions="Fill"
+                            >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                                Grid.Column="0"
+                                WidthRequest="80" HeightRequest="80"
+                                Source="{Binding 對話人圖片}" />
+                        <Label
+                                Grid.Column="1"
+                                Text="{Binding 對話內容}"
+                                FontSize="Large"
+                                TextColor="{Binding 對話文字顏色}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="OwnerChatTemplate" >
+                <ViewCell>
+                    <Grid
+                            HorizontalOptions="Fill"
+                            >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="90" />
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                                Grid.Column="1"
+                                WidthRequest="80" HeightRequest="80"
+                                Source="{Binding 對話人圖片}" />
+                        <Label
+                                Grid.Column="0"
+                                Text="{Binding 對話內容}"
+                                FontSize="Large"
+                                TextColor="{Binding 對話文字顏色}"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <TemplateSelectors:ChatDataTemplateSelector x:Key="ChatItemTemplate"
+                 OtherTemplate="{StaticResource OtherChatTemplate}"
+                 OwnerTemplate="{StaticResource OwnerChatTemplate}"
+                />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+        >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+        <ListView
+            Grid.Row="0" Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding ChatContentCollection}"
+            HasUnevenRows="True"
+            ItemTemplate="{StaticResource ChatItemTemplate}"
+            >
+        </ListView>
+
+        <Editor 
+            Grid.Row="1" Grid.Column="0"
+            Text="{Binding 送出對話內容}" />
+        <Button
+            Grid.Row="1" Grid.Column="1"
+            Text="送出"
+            Command="{Binding 送出Command}"/>
+    </Grid>
+</ContentPage>
