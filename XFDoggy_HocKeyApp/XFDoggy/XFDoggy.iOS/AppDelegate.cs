@@ -37,6 +37,15 @@ namespace XFDoggy.iOS
                         NSHttpCookieStorage.SharedStorage.DeleteCookie(cookie);
                     }
                     await MainHelper.client.LogoutAsync();
+
+                    // define useragent android like
+                    //string userAgent = "Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36";
+                    string userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 8_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12D508 [FBAN/FBIOS;FBAV/27.0.0.10.12;FBBV/8291884;FBDV/iPhone7,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/8.2;FBSS/3; FBCR/vodafoneIE;FBID/phone;FBLC/en_US;FBOP/5]";
+
+                    // set default useragent
+                    NSDictionary dictionary = NSDictionary.FromObjectAndKey(NSObject.FromObject(userAgent), NSObject.FromObject("UserAgent"));
+                    NSUserDefaults.StandardUserDefaults.RegisterDefaults(dictionary);
+
                     // 呼叫 Azure Mobile 用戶端的 LoginAsync 方法，依據指定的登入類型，進行身分驗證登入
                     user = await MainHelper.client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, p登入方式);
                     if (user != null)
